@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - ShopZone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #dc3545;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50%;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+        
+        .quantity-input {
+            width: 80px;
+        }
+        
+        footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 3rem 0;
+        }
+        
+        footer a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fs-4 fw-bold text-primary" href="index.html">ShopZone</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="btn btn-outline-secondary me-2"><i class="bi bi-search"></i></a>
+                    <a href="profile.html" class="btn btn-outline-secondary me-2"><i class="bi bi-person"></i></a>
+                    <a href="cart.html" class="btn btn-outline-secondary position-relative">
+                        <i class="bi bi-cart"></i>
+                        <span class="cart-badge" id="cartBadge">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <nav class="py-3 bg-light">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Shopping Cart</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <section class="py-5">
+        <div class="container">
+            <h1 class="h2 fw-bold mb-4">Shopping Cart</h1>
+
+            <div class="row">
+                <!-- Cart Items -->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Cart Item 1 -->
+                            <div class="row align-items-center border-bottom py-3" data-price="99.99">
+                                <div class="col-md-2">
+                                    <img src="https://via.placeholder.com/150" class="img-fluid cart-item-image rounded" alt="Wireless Headphones">
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="fw-semibold mb-1">Wireless Headphones</h6>
+                                    <p class="text-muted small mb-1">Color: Black</p>
+                                    <p class="text-muted small mb-0">SKU: WH001</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="fw-semibold">$99.99</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group quantity-input">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateQuantity(this, -1)">-</button>
+                                        <input type="number" class="form-control form-control-sm text-center" value="1" min="1" readonly>
+                                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateQuantity(this, 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <span class="fw-semibold item-total">$99.99</span>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-outline-danger btn-sm" onclick="removeItem(this)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Cart Item 2 -->
+                            <div class="row align-items-center border-bottom py-3" data-price="199.99">
+                                <div class="col-md-2">
+                                    <img src="https://via.placeholder.com/150" class="img-fluid cart-item-image rounded" alt="Smart Watch">
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="fw-semibold mb-1">Smart Watch</h6>
+                                    <p class="text-muted small mb-1">Color: Silver</p>
+                                    <p class="text-muted small mb-0">SKU: SW001</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="fw-semibold">$199.99</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="input-group quantity-input">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateQuantity(this, -1)">-</button>
+                                        <input type="number" class="form-control form-control-sm text-center" value="1" min="1" readonly>
+                                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="updateQuantity(this, 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <span class="fw-semibold item-total">$199.99</span>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-outline-danger btn-sm" onclick="removeItem(this)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Cart Actions -->
+                            <div class="d-flex justify-content-between align-items-center pt-3">
+                                <a href="shop.html" class="btn btn-outline-primary">
+                                    <i class="bi bi-arrow-left me-2"></i>Continue Shopping
+                                </a>
+                                <button class="btn btn-outline-secondary" onclick="clearCart()">Clear Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coupon Code -->
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h6 class="fw-semibold mb-3">Have a Coupon?</h6>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="Enter coupon code" id="couponCode">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-primary w-100" onclick="applyCoupon()">Apply Coupon</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-semibold mb-4">Order Summary</h5>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal (<span id="itemCount">2</span> items)</span>
+                                <span id="subtotal">$299.98</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Shipping</span>
+                                <span class="text-success">Free</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tax</span>
+                                <span id="tax">$24.00</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2" id="discountRow" style="display: none;">
+                                <span class="text-success">Discount</span>
+                                <span class="text-success" id="discount">-$0.00</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between mb-4">
+                                <strong>Total</strong>
+                                <strong id="total">$323.98</strong>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-lg" onclick="proceedToCheckout()">
+                                    Proceed to Checkout
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="bi bi-paypal me-2"></i>PayPal
+                                </button>
+                            </div>
+
+                            <!-- Security Info -->
+                            <div class="mt-4 p-3 bg-light rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-shield-check text-success me-2"></i>
+                                    <small class="fw-semibold">Secure Checkout</small>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-truck text-primary me-2"></i>
+                                    <small>Free shipping on orders over $50</small>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-arrow-repeat text-primary me-2"></i>
+                                    <small>30-day return policy</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h6 class="fw-semibold mb-3">Recently Viewed</h6>
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://via.placeholder.com/60" class="me-3 rounded" alt="Bluetooth Speaker">
+                                <div>
+                                    <h6 class="mb-1 small">Bluetooth Speaker</h6>
+                                    <p class="mb-0 text-muted small">$79.99</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <img src="https://via.placeholder.com/60" class="me-3 rounded" alt="Gaming Mouse">
+                                <div>
+                                    <h6 class="mb-1 small">Gaming Mouse</h6>
+                                    <p class="mb-0 text-muted small">$39.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <h3 class="h5 mb-3">ShopZone</h3>
+                    <p class="text-muted">Your one-stop destination for quality products at great prices.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="h6 mb-3">Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="h6 mb-3">Customer Service</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="profile.html">My Account</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="h6 mb-3">Contact Info</h4>
+                    <address class="text-muted">
+                        <div class="mb-2">123 Commerce St, City, State 12345</div>
+                        <div class="mb-2">+1 (555) 123-4567</div>
+                        <div>info@shopzone.com</div>
+                    </address>
+                </div>
+            </div>
+            <hr class="my-4 text-muted">
+            <div class="text-center">
+                <p class="text-muted mb-0">&copy; 2024 ShopZone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script>
+        function updateQuantity(button, change) {
+            const input = button.parentElement.querySelector('input');
+            const currentValue = parseInt(input.value);
+            const newValue = currentValue + change;
+
+            if (newValue >= 1) {
+                input.value = newValue;
+                updateItemTotal(button.closest('.row'));
+                updateOrderSummary();
+            }
+        }
+
+        function updateItemTotal(row) {
+            const price = parseFloat(row.dataset.price);
+            const quantity = parseInt(row.querySelector('input').value);
+            const total = price * quantity;
+            row.querySelector('.item-total').textContent = '$' + total.toFixed(2);
+        }
+
+        function removeItem(button) {
+            if (confirm('Are you sure you want to remove this item from your cart?')) {
+                button.closest('.row').remove();
+                updateOrderSummary();
+                updateCartBadge();
+            }
+        }
+
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                document.querySelectorAll('.row[data-price]').forEach(row => row.remove());
+                updateOrderSummary();
+                updateCartBadge();
+            }
+        }
+
+        function updateOrderSummary() {
+            const rows = document.querySelectorAll('.row[data-price]');
+            let subtotal = 0;
+            let itemCount = 0;
+
+            rows.forEach(row => {
+                const price = parseFloat(row.dataset.price);
+                const quantity = parseInt(row.querySelector('input').value);
+                subtotal += price * quantity;
+                itemCount += quantity;
+            });
+
+            const tax = subtotal * 0.08; // 8% tax
+            const total = subtotal + tax;
+
+            document.getElementById('itemCount').textContent = itemCount;
+            document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+            document.getElementById('total').textContent = '$' + total.toFixed(2);
+        }
+
+        function updateCartBadge() {
+            const rows = document.querySelectorAll('.row[data-price]');
+            let totalItems = 0;
+
+            rows.forEach(row => {
+                totalItems += parseInt(row.querySelector('input').value);
+            });
+
+            document.getElementById('cartBadge').textContent = totalItems;
+        }
+
+        function applyCoupon() {
+            const couponCode = document.getElementById('couponCode').value.trim();
+
+            if (couponCode === 'SAVE10') {
+                const subtotalElement = document.getElementById('subtotal');
+                const subtotal = parseFloat(subtotalElement.textContent.replace('$', ''));
+                const discount = subtotal * 0.1;
+
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discount').textContent = '-$' + discount.toFixed(2);
+
+                // Recalculate total
+                const tax = parseFloat(document.getElementById('tax').textContent.replace('$', ''));
+                const newTotal = subtotal - discount + tax;
+                document.getElementById('total').textContent = '$' + newTotal.toFixed(2);
+
+                showToast('Coupon applied successfully! You saved $' + discount.toFixed(2));
+            } else if (couponCode !== '') {
+                showToast('Invalid coupon code. Please try again.');
+            }
+        }
+
+        function proceedToCheckout() {
+            const rows = document.querySelectorAll('.row[data-price]');
+            if (rows.length === 0) {
+                showToast('Your cart is empty. Please add some items before checkout.');
+                return;
+            }
+            // Redirect to checkout page (would be implemented in a real application)
+            showToast('Redirecting to checkout...');
+            setTimeout(() => {
+                window.location.href = 'checkout.html';
+            }, 1500);
+        }
+
+        function showToast(message) {
+            const toastContainer = document.createElement('div');
+            toastContainer.style.cssText = 'position:fixed;top:20px;right:20px;z-index:1050;';
+
+            const toast = document.createElement('div');
+            toast.className = 'toast show';
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <strong class="me-auto">ShopZone</strong>
+                    <button type="button" class="btn-close" onclick="this.closest('.toast').parentElement.remove()"></button>
+                </div>
+                <div class="toast-body">${message}</div>
+            `;
+
+            toastContainer.appendChild(toast);
+            document.body.appendChild(toastContainer);
+
+            setTimeout(() => toastContainer.remove(), 3000);
+        }
+
+        // Initialize cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateOrderSummary();
+        });
+    </script>
+</body>
+
+</html>

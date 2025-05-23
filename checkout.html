@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ShopZone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #dc3545;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50%;
+        }
+        
+        .checkout-steps {
+            background-color: #f8f9fa;
+        }
+        
+        .step {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .step-completed {
+            background-color: #198754;
+            color: white;
+        }
+        
+        .step-pending {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
+        
+        footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 3rem 0;
+        }
+        
+        footer a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fs-4 fw-bold text-primary" href="index.html">ShopZone</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="btn btn-outline-secondary me-2"><i class="bi bi-search"></i></a>
+                    <a href="profile.html" class="btn btn-outline-secondary me-2"><i class="bi bi-person"></i></a>
+                    <a href="cart.html" class="btn btn-outline-secondary position-relative">
+                        <i class="bi bi-cart"></i>
+                        <span class="cart-badge">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <nav class="py-3 bg-light">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
+                <li class="breadcrumb-item active">Checkout</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Checkout Steps -->
+    <section class="checkout-steps py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="step step-completed text-center">
+                        <i class="bi bi-check-circle fs-4 mb-2"></i>
+                        <div>1. Shopping Cart</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step step-active text-center">
+                        <i class="bi bi-credit-card fs-4 mb-2"></i>
+                        <div>2. Checkout</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step step-pending text-center">
+                        <i class="bi bi-check-circle fs-4 mb-2"></i>
+                        <div>3. Order Complete</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Checkout Form -->
+                <div class="col-lg-8">
+                    <form id="checkoutForm">
+                        <!-- Shipping Information -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-truck me-2"></i>Shipping Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name *</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name *</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Street Address *</label>
+                                    <input type="text" class="form-control" id="address" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="city" class="form-label">City *</label>
+                                        <input type="text" class="form-control" id="city" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="state" class="form-label">State *</label>
+                                        <select class="form-select" id="state" required>
+                                            <option value="">Select State</option>
+                                            <option value="NY">New York</option>
+                                            <option value="CA">California</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="FL">Florida</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="zipCode" class="form-label">ZIP Code *</label>
+                                        <input type="text" class="form-control" id="zipCode" required>
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sameAsBilling" checked>
+                                    <label class="form-check-label" for="sameAsBilling">
+                                        Billing address is the same as shipping address
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Method -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-box-seam me-2"></i>Shipping Method</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="shipping" id="standard" value="standard" checked>
+                                    <label class="form-check-label" for="standard">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <strong>Standard Shipping</strong><br>
+                                                <small class="text-muted">5-7 business days</small>
+                                            </div>
+                                            <div class="text-success fw-bold">FREE</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="shipping" id="express" value="express">
+                                    <label class="form-check-label" for="express">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <strong>Express Shipping</strong><br>
+                                                <small class="text-muted">2-3 business days</small>
+                                            </div>
+                                            <div class="fw-bold">$9.99</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="shipping" id="overnight" value="overnight">
+                                    <label class="form-check-label" for="overnight">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <strong>Overnight Shipping</strong><br>
+                                                <small class="text-muted">Next business day</small>
+                                            </div>
+                                            <div class="fw-bold">$19.99</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Information -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-credit-card me-2"></i>Payment Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="credit" checked>
+                                            <label class="form-check-label" for="creditCard">
+                                                <i class="bi bi-credit-card me-2"></i>Credit/Debit Card
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
+                                            <label class="form-check-label" for="paypal">
+                                                <i class="bi bi-paypal me-2"></i>PayPal
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="creditCardForm">
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Card Number *</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="expiryMonth" class="form-label">Expiry Month *</label>
+                                            <select class="form-select" id="expiryMonth" required>
+                                                <option value="">Month</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="expiryYear" class="form-label">Expiry Year *</label>
+                                            <select class="form-select" id="expiryYear" required>
+                                                <option value="">Year</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="cvv" class="form-label">CVV *</label>
+                                            <input type="text" class="form-control" id="cvv" placeholder="123" maxlength="4" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cardName" class="form-label">Name on Card *</label>
+                                        <input type="text" class="form-control" id="cardName" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="card sticky-top">
+                        <div class="card-header">
+                            <h5 class="mb-0">Order Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Order Items -->
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <img src="https://via.placeholder.com/60" class="me-3 rounded" alt="Wireless Headphones">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0 small">Wireless Headphones</h6>
+                                        <small class="text-muted">Qty: 1</small>
+                                    </div>
+                                    <div class="fw-bold">$99.99</div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <img src="https://via.placeholder.com/60" class="me-3 rounded" alt="Smart Watch">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0 small">Smart Watch</h6>
+                                        <small class="text-muted">Qty: 1</small>
+                                    </div>
+                                    <div class="fw-bold">$199.99</div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <!-- Pricing Details -->
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$299.98</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Shipping</span>
+                                <span id="shippingCost" class="text-success">Free</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tax</span>
+                                <span id="tax">$24.00</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-4">
+                                <strong>Total</strong>
+                                <strong id="total">$323.98</strong>
+                            </div>
+
+                            <!-- Place Order Button -->
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-lg" onclick="placeOrder()">
+                                    <i class="bi bi-lock me-2"></i>Place Order
+                                </button>
+                                <a href="cart.html" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left me-2"></i>Back to Cart
+                                </a>
+                            </div>
+
+                            <!-- Security Info -->
+                            <div class="mt-4 p-3 bg-light rounded">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-shield-check text-success me-2"></i>
+                                    <small class="fw-semibold">Secure SSL Encryption</small>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-truck text-primary me-2"></i>
+                                    <small>Free returns within 30 days</small>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-headset text-primary me-2"></i>
+                                    <small>24/7 customer support</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <h3 class="h5 mb-3">ShopZone</h3>
+                    <p class="text-muted">Your one-stop destination for quality products at great prices.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="h6 mb-3">Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="h6 mb-3">Customer Service</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="profile.html">My Account</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="h6 mb-3">Contact Info</h4>
+                    <address class="text-muted">
+                        <div class="mb-2">123 Commerce St, City, State 12345</div>
+                        <div class="mb-2">+1 (555) 123-4567</div>
+                        <div>info@shopzone.com</div>
+                    </address>
+                </div>
+            </div>
+            <hr class="my-4 text-muted">
+            <div class="text-center">
+                <p class="text-muted mb-0">&copy; 2024 ShopZone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script>
+        // Update shipping cost based on selection
+        document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const shippingCostElement = document.getElementById('shippingCost');
+                const totalElement = document.getElementById('total');
+                const subtotal = 299.98;
+                const tax = 24.00;
+                let shippingCost = 0;
+
+                switch (this.value) {
+                    case 'standard':
+                        shippingCost = 0;
+                        shippingCostElement.textContent = 'Free';
+                        shippingCostElement.className = 'text-success';
+                        break;
+                    case 'express':
+                        shippingCost = 9.99;
+                        shippingCostElement.textContent = '$9.99';
+                        shippingCostElement.className = '';
+                        break;
+                    case 'overnight':
+                        shippingCost = 19.99;
+                        shippingCostElement.textContent = '$19.99';
+                        shippingCostElement.className = '';
+                        break;
+                }
+
+                const newTotal = subtotal + tax + shippingCost;
+                totalElement.textContent = '$' + newTotal.toFixed(2);
+            });
+        });
+
+        // Toggle payment form based on method
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const creditCardForm = document.getElementById('creditCardForm');
+                if (this.value === 'credit') {
+                    creditCardForm.style.display = 'block';
+                } else {
+                    creditCardForm.style.display = 'none';
+                }
+            });
+        });
+
+        function placeOrder() {
+            const form = document.getElementById('checkoutForm');
+
+            // Basic validation
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Show loading state
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+            button.disabled = true;
+
+            // Simulate order processing
+            setTimeout(() => {
+                showToast('Order placed successfully! Redirecting to confirmation page...');
+                setTimeout(() => {
+                    // In a real application, this would redirect to an order confirmation page
+                    window.location.href = 'index.html';
+                }, 2000);
+            }, 3000);
+        }
+
+        function showToast(message) {
+            const toastContainer = document.createElement('div');
+            toastContainer.style.cssText = 'position:fixed;top:20px;right:20px;z-index:1050;';
+
+            const toast = document.createElement('div');
+            toast.className = 'toast show';
+            toast.innerHTML = `
+                <div class="toast-header">
+                    <strong class="me-auto">ShopZone</strong>
+                    <button type="button" class="btn-close" onclick="this.closest('.toast').parentElement.remove()"></button>
+                </div>
+                <div class="toast-body">${message}</div>
+            `;
+
+            toastContainer.appendChild(toast);
+            document.body.appendChild(toastContainer);
+
+            setTimeout(() => toastContainer.remove(), 5000);
+        }
+
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function() {
+            let value = this.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g);
+            this.value = formattedValue ? formattedValue.join(' ') : value;
+        });
+
+        // Only allow numbers in CVV
+        document.getElementById('cvv').addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+</body>
+
+</html>
